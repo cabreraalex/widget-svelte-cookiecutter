@@ -9,6 +9,8 @@ import {
 
 import { MODULE_NAME, MODULE_VERSION } from './version';
 
+import App from "./App.svelte"
+
 // Import the CSS
 import '../css/widget.css';
 
@@ -41,13 +43,12 @@ export class ExampleModel extends DOMWidgetModel {
 
 export class ExampleView extends DOMWidgetView {
   render() {
-    this.el.classList.add('custom-widget');
-
-    this.value_changed();
-    this.model.on('change:value', this.value_changed, this);
-  }
-
-  value_changed() {
-    this.el.textContent = this.model.get('value');
+    new App({
+      target: this.el,
+      props: {
+        value: 'oh please',
+        model: this.model
+      },
+    });
   }
 }

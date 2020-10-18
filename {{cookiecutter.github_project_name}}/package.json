@@ -87,7 +87,9 @@
     "ts-loader": "^5.2.1",
     "typescript": "~3.8",
     "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.1.2",
+    "svelte": "^3.0.0",
+    "svelte-loader": "2.13.3"
   },
   "jupyterlab": {
     "extension": "lib/plugin"
