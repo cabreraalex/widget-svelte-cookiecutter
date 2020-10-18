@@ -1,9 +1,9 @@
 // Copyright (c) {{ cookiecutter.author_name }}
 // Distributed under the terms of the Modified BSD License.
 
-import { Application, IPlugin } from '@phosphor/application';
+import type { Application, IPlugin } from '@phosphor/application';
 
-import { Widget } from '@phosphor/widgets';
+import type { Widget } from '@phosphor/widgets';
 
 import { IJupyterWidgetRegistry } from '@jupyter-widgets/base';
 
