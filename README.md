@@ -1,12 +1,12 @@
-# widget-ts-cookiecutter
+# widget-svelte-cookiecutter
 
 A [cookiecutter](https://github.com/audreyr/cookiecutter) template for a custom
 Jupyter widget project.
 
-## What is widget-ts-cookiecutter?
+## What is widget-svelte-cookiecutter?
 
-With **widget-ts-cookiecutter** you can create a custom Jupyter interactive
-widget project with sensible defaults. widget-ts-cookiecutter helps custom widget
+With **widget-svelte-cookiecutter** you can create a custom Jupyter interactive
+widget project with sensible defaults. widget-svelte-cookiecutter helps custom widget
 authors get started with best practices for the packaging and distribution
 of a custom Jupyter interactive widget library.
 
@@ -16,9 +16,9 @@ Install [cookiecutter](https://github.com/audreyr/cookiecutter):
 
     $ pip install cookiecutter
 
-After installing cookiecutter, use widget-ts-cookiecutter:
+After installing cookiecutter, use widget-svelte-cookiecutter:
 
-    $ cookiecutter https://github.com/jupyter-widgets/widget-ts-cookiecutter.git
+    $ cookiecutter https://github.com/cabreraalex/widget-svelte-cookiecutter
 
 As widget-ts-cookiecutter runs, you will be asked for basic information about
 your custom Jupyter widget project. You will be prompted for the following
@@ -69,7 +69,6 @@ Note that the `--symlink` flag doesn't work on Windows, so you will here have to
 the `install` command every time that you rebuild your extension. For certain installations
 you might also need another flag instead of `--sys-prefix`, but we won't cover the meaning
 of those flags here.
-
 
 ## Releasing your initial packages:
 
