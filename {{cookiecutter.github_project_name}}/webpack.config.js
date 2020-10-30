@@ -16,11 +16,32 @@ const rules = [
 const externals = ['@jupyter-widgets/base'];
 
 const resolve = {
+  alias: {
+    svelte: path.resolve('node_modules', 'svelte'),
+  },
   // Add '.ts' and '.tsx' as resolvable extensions.
-  extensions: ['.webpack.js', '.web.js', '.ts', '.js', '.svelte'],
+  extensions: ['.webpack.js', '.web.js', '.mjs', '.ts', '.js', '.svelte'],
+  mainFields: ['svelte', 'browser', 'module', 'main'],
 };
 
 module.exports = [
+  /** Lib */
+  {
+    entry: {
+      plugin: './src/plugin.ts',
+    },
+    output: {
+      filename: '[name].js',
+      path: path.resolve(__dirname, 'lib'),
+      libraryTarget: 'amd',
+    },
+    module: {
+      rules: rules,
+    },
+    devtool: 'source-map',
+    externals,
+    resolve,
+  },
   /**
    * Notebook extension
    *
