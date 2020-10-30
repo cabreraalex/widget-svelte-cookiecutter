@@ -29,9 +29,8 @@
     "url": "https://github.com/{{ cookiecutter.github_organization_name }}/{{ cookiecutter.github_project_name }}"
   },
   "scripts": {
-    "build": "npm run build:lib && npm run build:nbextension",
+    "build": "npm run build:nbextension",
     "build:labextension": "npm run clean:labextension && mkdirp {{ cookiecutter.python_package_name }}/labextension && cd {{ cookiecutter.python_package_name }}/labextension && npm pack ../..",
-    "build:lib": "tsc",
     "build:nbextension": "webpack -p",
     "build:all": "npm run build:labextension && npm run build:nbextension",
     "clean": "npm run clean:lib && npm run clean:nbextension",
@@ -40,14 +39,8 @@
     "clean:nbextension": "rimraf {{ cookiecutter.python_package_name }}/nbextension/static/index.js",
     "lint": "eslint . --ext .ts,.tsx --fix",
     "lint:check": "eslint . --ext .ts,.tsx",
-    "prepack": "npm run build:lib",
-    "test": "npm run test:firefox",
-    "test:chrome": "karma start --browsers=Chrome tests/karma.conf.js",
-    "test:debug": "karma start --browsers=Chrome --singleRun=false --debug=true tests/karma.conf.js",
-    "test:firefox": "karma start --browsers=Firefox tests/karma.conf.js",
-    "test:ie": "karma start --browsers=IE tests/karma.conf.js",
+    "prepack": "npm run build",
     "watch": "npm-run-all -p watch:*",
-    "watch:lib": "tsc -w",
     "watch:nbextension": "webpack --watch"
   },
   "dependencies": {

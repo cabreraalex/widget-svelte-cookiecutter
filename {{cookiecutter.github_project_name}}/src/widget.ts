@@ -9,10 +9,7 @@ import {
 
 import { MODULE_NAME, MODULE_VERSION } from './version';
 
-import App from "./App.svelte"
-
-// Import the CSS
-import '../css/widget.css';
+import App from './App.svelte';
 
 export class ExampleModel extends DOMWidgetModel {
   defaults() {
@@ -24,7 +21,9 @@ export class ExampleModel extends DOMWidgetModel {
       _view_name: ExampleModel.view_name,
       _view_module: ExampleModel.view_module,
       _view_module_version: ExampleModel.view_module_version,
-      value: 'Hello World',
+      // Custom Traitlets/state that should be updated in example.py and App.svelte
+      value: 0,
+      intro: 'Hello',
     };
   }
 
@@ -46,8 +45,7 @@ export class ExampleView extends DOMWidgetView {
     new App({
       target: this.el,
       props: {
-        value: 'oh please',
-        model: this.model
+        model: this.model,
       },
     });
   }

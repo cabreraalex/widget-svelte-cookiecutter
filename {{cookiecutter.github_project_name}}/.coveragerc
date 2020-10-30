@@ -1,2 +1,0 @@
-[run]
-omit = {{ cookiecutter.python_package_name  }}/tests/*
