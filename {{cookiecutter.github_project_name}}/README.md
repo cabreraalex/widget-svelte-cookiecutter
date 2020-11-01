@@ -1,9 +1,4 @@
-
 # {{ cookiecutter.github_project_name }}
-
-[![Build Status](https://travis-ci.org/{{ cookiecutter.github_organization_name }}/{{ cookiecutter.github_project_name  }}.svg?branch=master)](https://travis-ci.org/{{ cookiecutter.github_organization_name }}/{{ cookiecutter.python_package_name  }})
-[![codecov](https://codecov.io/gh/{{ cookiecutter.github_organization_name }}/{{ cookiecutter.github_project_name  }}/branch/master/graph/badge.svg)](https://codecov.io/gh/{{ cookiecutter.github_organization_name }}/{{ cookiecutter.github_project_name  }})
-
 
 {{ cookiecutter.project_short_description }}
 
@@ -24,16 +19,16 @@ jupyter labextension install @jupyter-widgets/jupyterlab-manager
 
 If you are using Jupyter Notebook 5.2 or earlier, you may also need to enable
 the nbextension:
+
 ```bash
 jupyter nbextension enable --py [--sys-prefix|--user|--system] {{ cookiecutter.python_package_name  }}
 ```
 
 ## Development Installation
 
-
 ```bash
 # First install the python package. This will also build the JS packages.
-pip install -e ".[test, examples]"
+pip install -e .
 ```
 
 When developing your extensions, you need to manually enable your extensions with the
@@ -57,12 +52,17 @@ you might also need another flag instead of `--sys-prefix`, but we won't cover t
 of those flags here.
 
 ### How to see your changes
+
 #### Typescript:
+
 To continuously monitor the project for changes and automatically trigger a rebuild, start Jupyter in watch mode:
+
 ```bash
 jupyter lab --watch
 ```
+
 And in a separate session, begin watching the source directory for changes:
+
 ```bash
 npm run watch
 ```
@@ -70,4 +70,5 @@ npm run watch
 After a change wait for the build to finish and then refresh your browser and the changes should take effect.
 
 #### Python:
+
 If you make a change to the python code then you will need to restart the notebook kernel to have it take effect.

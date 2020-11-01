@@ -47,12 +47,13 @@ data_files_spec = [
     ('share/jupyter/nbextensions/{{ cookiecutter.python_package_name}}',
         nb_path, '*.js*'),
     ('share/jupyter/lab/extensions', lab_path, '*.tgz'),
-    ('etc/jupyter/nbconfig/notebook.d' , HERE, '{{ cookiecutter.python_package_name}}.json')
+    ('etc/jupyter/nbconfig/notebook.d', HERE,
+     '{{ cookiecutter.python_package_name}}.json')
 ]
 
 
 cmdclass = create_cmdclass('jsdeps', package_data_spec=package_data_spec,
-    data_files_spec=data_files_spec)
+                           data_files_spec=data_files_spec)
 cmdclass['jsdeps'] = combine_commands(
     install_npm(HERE, build_cmd='build:all'),
     ensure_targets(jstargets),
@@ -60,19 +61,19 @@ cmdclass['jsdeps'] = combine_commands(
 
 
 setup_args = dict(
-    name            = name,
-    description     = '{{ cookiecutter.project_short_description }}',
-    version         = version,
-    scripts         = glob(pjoin('scripts', '*')),
-    cmdclass        = cmdclass,
-    packages        = find_packages(),
-    author          = '{{ cookiecutter.author_name }}',
-    author_email    = '{{ cookiecutter.author_email }}',
-    url             = 'https://github.com/{{ cookiecutter.github_organization_name }}/{{ cookiecutter.github_project_name }}',
-    license         = 'BSD',
-    platforms       = "Linux, Mac OS X, Windows",
-    keywords        = ['Jupyter', 'Widgets', 'IPython'],
-    classifiers     = [
+    name=name,
+    description='{{ cookiecutter.project_short_description }}',
+    version=version,
+    scripts=glob(pjoin('scripts', '*')),
+    cmdclass=cmdclass,
+    packages=find_packages(),
+    author='{{ cookiecutter.author_name }}',
+    author_email='{{ cookiecutter.author_email }}',
+    url='https://github.com/{{ cookiecutter.github_organization_name }}/{{ cookiecutter.github_project_name }}',
+    license='BSD',
+    platforms="Linux, Mac OS X, Windows",
+    keywords=['Jupyter', 'Widgets', 'IPython'],
+    classifiers=[
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: BSD License',
@@ -84,31 +85,11 @@ setup_args = dict(
         'Programming Language :: Python :: 3.7',
         'Framework :: Jupyter',
     ],
-    include_package_data = True,
-    install_requires = [
+    include_package_data=True,
+    install_requires=[
         'ipywidgets>=7.0.0',
     ],
-    extras_require = {
-        'test': [
-            'pytest>=4.6',
-            'pytest-cov',
-            'nbval',
-        ],
-        'examples': [
-            # Any requirements for the examples to run
-        ],
-        'docs': [
-            'sphinx>=1.5',
-            'recommonmark',
-            'sphinx_rtd_theme',
-            'nbsphinx>=0.2.13,<0.4.0',
-            'jupyter_sphinx',
-            'nbsphinx-link',
-            'pytest_check_links',
-            'pypandoc',
-        ],
-    },
-    entry_points = {
+    entry_points={
     },
 )
 

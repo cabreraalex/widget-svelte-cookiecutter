@@ -1,14 +1,10 @@
 # widget-svelte-cookiecutter
 
 A [cookiecutter](https://github.com/audreyr/cookiecutter) template for a custom
-Jupyter widget project.
-
-## What is widget-svelte-cookiecutter?
-
+Jupyter widget project using [Svelte](https://svelte.dev/).
 With **widget-svelte-cookiecutter** you can create a custom Jupyter interactive
-widget project with sensible defaults. widget-svelte-cookiecutter helps custom widget
-authors get started with best practices for the packaging and distribution
-of a custom Jupyter interactive widget library.
+widget project that uses Svelte for the frontend.
+This was adapted from the fantastic [widget-ts-cookiecutter](https://github.com/jupyter-widgets/widget-ts-cookiecutter).
 
 ## Usage
 
@@ -20,7 +16,7 @@ After installing cookiecutter, use widget-svelte-cookiecutter:
 
     $ cookiecutter https://github.com/cabreraalex/widget-svelte-cookiecutter
 
-As widget-ts-cookiecutter runs, you will be asked for basic information about
+As widget-svelte-cookiecutter runs, you will be asked for basic information about
 your custom Jupyter widget project. You will be prompted for the following
 information:
 
@@ -36,25 +32,57 @@ information:
   be used for both the "back-end" and "front-end" packages.
 
 After this, you will have a directory containing files used for creating a
-custom Jupyter widget. To check that eveything is set up as it should be,
-you should run the tests:
+custom Jupyter widget.
 
-```bash
-# First install the python package. This will also build the JS packages.
-pip install -e ".[test, examples]"
+## Code Overview
 
-# Run the python tests. This should not give you a few sucessful example tests
-py.test
+The cookiecutter creates the following files:
 
-# Run the JS tests. This should again, only give TODO errors (Expected 'Value' to equal 'Expected value'):
-npm test
+- TypeScript and Svelte frontend code
+
 ```
+src
+├── App.svelte
+├── extension.ts
+├── index.ts
+├── plugin.ts
+├── stores.ts
+├── version.ts
+└── widget.ts
+```
+
+The primary files in this directory are `widget.ts` and `App.svelte`. `widget.ts` defines the frontend widget and instantiates the svelte `App.svelte`.
+
+- Python backend kernel
+
+```
+{{package-name}}
+├── __init__.py
+├── _frontend.py
+├── _version.py
+├── example.py
+```
+
+`example.py` is the main file for the backend. It defines the Traitlets, and can dynamically update and react to state changes.
+
+### Example - Adding a Traitlet
+
+To add a new Traitlet, essentially a synced variable:
+
+1. Add a definition to `example.py`
+2. Add an entry by the same name to `widget.ts` in `ExampleModel`'s defaults function
+3. Define a store using `createValue()` in `App.svelte`
+
+Any updates to the store will update the kernel Traitlet and vice-versa.
+
+## Installation
 
 When developing your extensions, you need to manually enable your extensions with the
 notebook / lab frontend. For lab, this is done by the command:
 
 ```
-jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build
+jupyter labextension install @jupyter-widgets/
+jlpm --no-build
 jupyter labextension install .
 ```
 
@@ -72,8 +100,6 @@ of those flags here.
 
 ## Releasing your initial packages:
 
-- Add tests
-- Ensure tests pass locally and on CI. Check that the coverage is reasonable.
 - Make a release commit, where you remove the `, 'dev'` entry in `_version.py`.
 - Update the version in `package.json`
 - Relase the npm packages:
