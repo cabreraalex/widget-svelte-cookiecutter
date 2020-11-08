@@ -23,7 +23,6 @@ export class ExampleModel extends DOMWidgetModel {
       _view_module_version: ExampleModel.view_module_version,
       // Custom Traitlets/state that should be updated in example.py and App.svelte
       value: 0,
-      intro: 'Hello',
     };
   }
 

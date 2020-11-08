@@ -4,7 +4,6 @@
   // Creates a Svelte store (https://svelte.dev/tutorial/writable-stores) that syncs with the named Traitlet in widget.ts and example.py.
   import { createValue } from './stores';
   let value = createValue(model, 'value');
-  let intro = createValue(model, 'intro');
 </script>
 
 <style>
@@ -13,7 +12,6 @@
   }
 </style>
 
-<h1>{$intro} {$value}!</h1>
+<h1>The value is: {$value}</h1>
 <button on:click={() => value.update((d) => d + 1)}>update val</button>
 <br />
-<input bind:value={$intro} />
