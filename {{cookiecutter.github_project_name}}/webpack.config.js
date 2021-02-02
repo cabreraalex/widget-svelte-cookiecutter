@@ -25,7 +25,7 @@ const resolve = {
 };
 
 module.exports = [
-  /** Lib */
+  /** Lib - compile Typescript and Svelte files. */
   {
     entry: {
       plugin: './src/plugin.ts',
@@ -41,6 +41,24 @@ module.exports = [
     devtool: 'source-map',
     externals,
     resolve,
+  },
+  /** Mock - server to test changes w/o building Jupyter */
+  {
+    entry: {
+      bundle: ['./src/mock.ts'],
+    },
+    output: {
+      path: __dirname + '/mock/',
+      filename: 'bundle.js',
+      publicPath: __dirname + '/mock/',
+    },
+    module: {
+      rules: rules,
+    },
+    resolve,
+    optimization: {
+      minimize: false,
+    },
   },
   /**
    * Notebook extension
