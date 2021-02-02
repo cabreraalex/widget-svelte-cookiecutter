@@ -48,9 +48,9 @@ module.exports = [
       bundle: ['./src/mock.ts'],
     },
     output: {
-      path: __dirname + '/mock/',
+      path: path.resolve(__dirname + 'mock'),
       filename: 'bundle.js',
-      publicPath: __dirname + '/mock/',
+      publicPath: path.resolve(__dirname + 'mock'),
     },
     module: {
       rules: rules,

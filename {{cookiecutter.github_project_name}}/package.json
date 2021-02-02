@@ -41,7 +41,7 @@
     "prepack": "npm run build",
     "watch": "npm-run-all -p watch:*",
     "watch:nbextension": "webpack --watch",
-    "dev": "webpack-cli serve --inline --hot --content-base ./mock"
+    "dev": "webpack-cli serve --inline --hot --progress --content-base ./mock --open -o ./mock"
   },
   "dependencies": {
     "@jupyter-widgets/base": "^1.1.10 || ^2 || ^3"
