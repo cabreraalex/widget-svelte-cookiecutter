@@ -70,10 +70,15 @@ The primary files in this directory are `widget.ts` and `App.svelte`. `widget.ts
 To add a new Traitlet, essentially a synced variable:
 
 1. Add a definition to `example.py`
-2. Add an entry by the same name to `widget.ts` in `ExampleModel`'s defaults function
-3. Define a store using `createValue()` in `App.svelte`
+2. Define a store by the same name using `createValue()` in `App.svelte`
 
 Any updates to the store will update the kernel Traitlet and vice-versa.
+
+### Example - Development server
+
+Since compiling Jupyter Notebook/Lab can be slow, you can run a mock development server for the frontend widget using `npm run dev`
+
+You can mock the backend functionality by editing the MockModel class in mock.ts. 
 
 ## Installation
 
