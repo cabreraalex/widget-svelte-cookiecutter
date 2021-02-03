@@ -69,6 +69,7 @@
     "style-loader": "^1.0.0",
     "ts-loader": "^5.2.1",
     "typescript": "~3.8",
+    "webpack": "^5.20.1",
     "webpack-cli": "^4.4.0",
     "webpack-dev-server": "^3.11.2",
     "svelte": "^3.0.0",
