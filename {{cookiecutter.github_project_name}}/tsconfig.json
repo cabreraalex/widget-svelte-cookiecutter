@@ -4,7 +4,6 @@
     "declaration": true,
     "esModuleInterop": true,
     "lib": ["es2015", "dom"],
-    "module": "commonjs",
     "moduleResolution": "node",
     "noEmitOnError": true,
     "noUnusedLocals": true,

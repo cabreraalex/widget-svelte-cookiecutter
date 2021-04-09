@@ -1,11 +1,18 @@
 const path = require('path');
 const version = require('./package.json').version;
+const SveltePreprocess = require('svelte-preprocess');
+
+// Mode needs to be set to prevent warning
+const mode = 'development';
 
 // Custom webpack rules
 const rules = [
   {
     test: /\.svelte$/,
     loader: 'svelte-loader',
+    options: {
+      preprocess: SveltePreprocess(),
+    }
   },
   { test: /\.ts$/, loader: 'ts-loader' },
   { test: /\.js$/, loader: 'source-map-loader' },
@@ -27,6 +34,7 @@ const resolve = {
 module.exports = [
   /** Lib - compile Typescript and Svelte files. */
   {
+    mode: mode,
     entry: {
       plugin: './src/plugin.ts',
     },
@@ -44,6 +52,7 @@ module.exports = [
   },
   /** Mock - server to test changes w/o building Jupyter */
   {
+    mode: mode,
     entry: {
       bundle: ['./src/mock.ts'],
     },
@@ -67,6 +76,7 @@ module.exports = [
    * the notebook.
    */
   {
+    mode: mode,
     entry: './src/extension.ts',
     output: {
       filename: 'index.js',
@@ -97,6 +107,7 @@ module.exports = [
    * the custom widget embedder.
    */
   {
+    mode: mode,
     entry: './src/index.ts',
     output: {
       filename: 'index.js',
@@ -122,6 +133,7 @@ module.exports = [
    * This bundle is used to embed widgets in the package documentation.
    */
   {
+    mode: mode,
     entry: './src/index.ts',
     output: {
       filename: 'embed-bundle.js',
