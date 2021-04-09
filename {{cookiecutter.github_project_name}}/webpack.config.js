@@ -1,11 +1,15 @@
 const path = require('path');
 const version = require('./package.json').version;
+const SveltePreprocess = require('svelte-preprocess');
 
 // Custom webpack rules
 const rules = [
   {
     test: /\.svelte$/,
     loader: 'svelte-loader',
+    options: {
+      preprocess: SveltePreprocess(),
+    }
   },
   { test: /\.ts$/, loader: 'ts-loader' },
   { test: /\.js$/, loader: 'source-map-loader' },

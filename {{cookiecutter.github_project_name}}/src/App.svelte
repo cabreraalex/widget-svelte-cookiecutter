@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   export let model;
 
   // Creates a Svelte store (https://svelte.dev/tutorial/writable-stores) that syncs with the named Traitlet in widget.ts and example.py.
