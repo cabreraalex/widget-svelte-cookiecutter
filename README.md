@@ -107,7 +107,7 @@ of those flags here.
 
 - Make a release commit, where you remove the `, 'dev'` entry in `_version.py`.
 - Update the version in `package.json`
-- Relase the npm packages:
+- Release the npm packages:
   ```bash
   npm login
   npm publish
