@@ -4,6 +4,7 @@ import App from './App.svelte';
 class MockModel {
   set() {}
   undo() {}
+  get(name: string) {}
   on(variableName: string, callback: () => void, context: any) {}
   save_changes() {}
 }
