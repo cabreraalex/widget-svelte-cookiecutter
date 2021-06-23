@@ -86,7 +86,6 @@ When developing your extensions, you need to manually enable your extensions wit
 notebook / lab frontend. For lab, this is done by the command:
 
 ```
-jupyter labextension install @jupyter-widgets/
 jlpm --no-build
 jupyter labextension install .
 ```
