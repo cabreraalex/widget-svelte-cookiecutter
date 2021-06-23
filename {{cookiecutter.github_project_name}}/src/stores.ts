@@ -3,7 +3,10 @@ import { writable } from 'svelte/store';
 
 export function createValue(model: any, name_: string, value_: any) {
   const name: string = name_;
-  const curVal: Writable<any> = writable(value_);
+  const modelValue = model.get(name);
+  const curVal: Writable<any> = writable(
+    modelValue === undefined ? value_ : modelValue
+  );
 
   model.on('change:' + name, () => curVal.set(model.get(name)), null);
 
