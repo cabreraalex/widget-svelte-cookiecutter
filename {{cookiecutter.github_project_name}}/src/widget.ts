@@ -6,10 +6,11 @@ import {
   DOMWidgetView,
   ISerializers,
 } from '@jupyter-widgets/base';
+import { setStoreModels } from './stores';
 
 import { MODULE_NAME, MODULE_VERSION } from './version';
 
-import App from './App.svelte';
+import Widget from './Widget.svelte'
 
 export class ExampleModel extends DOMWidgetModel {
   defaults() {
@@ -21,6 +22,7 @@ export class ExampleModel extends DOMWidgetModel {
       _view_name: ExampleModel.view_name,
       _view_module: ExampleModel.view_module,
       _view_module_version: ExampleModel.view_module_version,
+      value: 'Hello World',
     };
   }
 
@@ -39,11 +41,7 @@ export class ExampleModel extends DOMWidgetModel {
 
 export class ExampleView extends DOMWidgetView {
   render() {
-    new App({
-      target: this.el,
-      props: {
-        model: this.model,
-      },
-    });
+    setStoreModels(this.model);
+    new Widget({ target: this.el });
   }
 }
