@@ -1,4 +1,4 @@
-# widget-ts-cookiecutter
+# widget-svelte-cookiecutter
 
 A [cookiecutter](https://github.com/audreyr/cookiecutter) template for a custom
 Jupyter widget project using [Svelte](https://svelte.dev/).
