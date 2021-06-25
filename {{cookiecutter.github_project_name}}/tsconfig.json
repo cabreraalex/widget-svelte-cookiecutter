@@ -2,7 +2,7 @@
   "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
     "declaration": true,
-    "esModuleInterop":true,
+    "esModuleInterop": true,
     "lib": ["es2015", "dom"],
     "moduleResolution": "node",
     "noEmitOnError": true,
@@ -15,15 +15,11 @@
     "strict": true,
     "strictPropertyInitialization": false,
     "target": "es2015",
-    "types": ["jest", "svelte", "node"],
+    "types": ["svelte", "node"],
     "importsNotUsedAsValues": "error",
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.svelte"
-  ],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.svelte"],
   "exclude": ["src/**/__tests__"]
 }
