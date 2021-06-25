@@ -20,6 +20,6 @@
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules/*", "__sapper__/*", "public/*"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.svelte"],
+  "exclude": ["src/**/__tests__"]
 }

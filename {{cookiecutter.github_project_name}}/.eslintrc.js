@@ -7,10 +7,11 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: 'tsconfig.json',
+    project: 'tsconfig.eslint.json',
     sourceType: 'module'
   },
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'svelte3'],
+  overrides: [{files: ['*.svelte'], processor: 'svelte3/svelte3'}],
   rules: {
     '@typescript-eslint/no-unused-vars': ['warn', { args: 'none' }],
     '@typescript-eslint/no-explicit-any': 'off',
@@ -24,5 +25,8 @@ module.exports = {
     curly: ['error', 'all'],
     eqeqeq: 'error',
     'prefer-arrow-callback': 'error'
+  },
+  settings: {
+    'svelte3/typescript': true
   }
 };

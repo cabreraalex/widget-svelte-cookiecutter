@@ -1,10 +1,12 @@
-# widget-svelte-cookiecutter
+# widget-ts-cookiecutter
 
 A [cookiecutter](https://github.com/audreyr/cookiecutter) template for a custom
 Jupyter widget project using [Svelte](https://svelte.dev/).
 With **widget-svelte-cookiecutter** you can create a custom Jupyter interactive
 widget project that uses Svelte for the frontend.
 This was adapted from the fantastic [widget-ts-cookiecutter](https://github.com/jupyter-widgets/widget-ts-cookiecutter).
+
+For an overview of how to use IPyWidgets + Svelte, check out this [blog post](https://cabreraalex.medium.com/creating-reactive-jupyter-widgets-with-svelte-ef2fb580c05).
 
 ## Usage
 
@@ -16,7 +18,7 @@ After installing cookiecutter, use widget-svelte-cookiecutter:
 
     $ cookiecutter https://github.com/cabreraalex/widget-svelte-cookiecutter
 
-As widget-svelte-cookiecutter runs, you will be asked for basic information about
+As widget-ts-cookiecutter runs, you will be asked for basic information about
 your custom Jupyter widget project. You will be prompted for the following
 information:
 
@@ -32,62 +34,34 @@ information:
   be used for both the "back-end" and "front-end" packages.
 
 After this, you will have a directory containing files used for creating a
-custom Jupyter widget.
+custom Jupyter widget. To check that eveything is set up as it should be,
+you should run the tests:
 
-## Code Overview
-
-The cookiecutter creates the following files:
-
-- TypeScript and Svelte frontend code
-
-```
-src
-├── App.svelte
-├── extension.ts
-├── index.ts
-├── plugin.ts
-├── stores.ts
-├── version.ts
-└── widget.ts
+Create a dev environment:
+```bash
+conda create -n widget-dev -c conda-forge nodejs yarn python jupyterlab
+conda activate widget-dev
 ```
 
-The primary files in this directory are `widget.ts` and `App.svelte`. `widget.ts` defines the frontend widget and instantiates the svelte `App.svelte`.
+Install the python. This will also build the TS package.
 
-- Python backend kernel
+```bash
+# First install the python package. This will also build the JS packages.
+pip install -e ".[test, examples]"
 
+# Run the python tests. This should not give you a few sucessful example tests
+py.test
+
+# Run the JS tests. This should again, only give TODO errors (Expected 'Value' to equal 'Expected value'):
+yarn test
 ```
-{{package-name}}
-├── __init__.py
-├── _frontend.py
-├── _version.py
-├── example.py
-```
-
-`example.py` is the main file for the backend. It defines the Traitlets, and can dynamically update and react to state changes.
-
-### Example - Adding a Traitlet
-
-To add a new Traitlet, essentially a synced variable:
-
-1. Add a definition to `example.py`
-2. Define a store by the same name using `createValue()` in `App.svelte`
-
-Any updates to the store will update the kernel Traitlet and vice-versa.
-
-### Example - Development server
-
-Since compiling Jupyter Notebook/Lab can be slow, you can run a mock development server for the frontend widget using `npm run dev`
-
-You can mock the backend functionality by editing the MockModel class in mock.ts. 
-
-## Installation
 
 When developing your extensions, you need to manually enable your extensions with the
 notebook / lab frontend. For lab, this is done by the command:
 
 ```
-jlpm --no-build
-jupyter labextension install .
+jupyter labextension develop --overwrite .
+yarn run build
 ```
 
 For classic notebook, you can run:
@@ -102,11 +76,31 @@ the `install` command every time that you rebuild your extension. For certain in
 you might also need another flag instead of `--sys-prefix`, but we won't cover the meaning
 of those flags here.
 
+
+### How to see your changes
+#### Typescript:
+If you use JupyterLab to develop then you can watch the source directory and run JupyterLab at the same time in different
+terminals to watch for changes in the extension's source and automatically rebuild the widget.
+
+```bash
+# Watch the source directory in one terminal, automatically rebuilding when needed
+yarn run watch
+# Run JupyterLab in another terminal
+jupyter lab
+```
+
+After a change wait for the build to finish and then refresh your browser and the changes should take effect.
+
+#### Python:
+If you make a change to the python code then you will need to restart the notebook kernel to have it take effect.
+
 ## Releasing your initial packages:
 
+- Add tests
+- Ensure tests pass locally and on CI. Check that the coverage is reasonable.
 - Make a release commit, where you remove the `, 'dev'` entry in `_version.py`.
 - Update the version in `package.json`
-- Release the npm packages:
+- Relase the npm packages:
   ```bash
   npm login
   npm publish

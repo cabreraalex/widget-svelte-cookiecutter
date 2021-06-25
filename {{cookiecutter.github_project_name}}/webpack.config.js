@@ -2,73 +2,51 @@ const path = require('path');
 const version = require('./package.json').version;
 const SveltePreprocess = require('svelte-preprocess');
 
-// Mode needs to be set to prevent warning
-const mode = 'development';
-
 // Custom webpack rules
 const rules = [
-  {
+  { test: /\.ts$/, loader: 'ts-loader' },
+  { test: /\.js$/, loader: 'source-map-loader' },
+  { test: /\.css$/, use: ['style-loader', 'css-loader']},
+    {
     test: /\.svelte$/,
     loader: 'svelte-loader',
     options: {
       preprocess: SveltePreprocess(),
     }
   },
-  { test: /\.ts$/, loader: 'ts-loader' },
-  { test: /\.js$/, loader: 'source-map-loader' },
-  { test: /\.css$/, use: ['style-loader', 'css-loader'] },
 ];
 
 // Packages that shouldn't be bundled but loaded at runtime
 const externals = ['@jupyter-widgets/base'];
 
 const resolve = {
-  alias: {
-    svelte: path.resolve('node_modules', 'svelte'),
-  },
   // Add '.ts' and '.tsx' as resolvable extensions.
-  extensions: ['.webpack.js', '.web.js', '.mjs', '.ts', '.js', '.svelte'],
-  mainFields: ['svelte', 'browser', 'module', 'main'],
+  extensions: [".webpack.js", ".web.js", ".ts", ".js", ".svelte"],
+  mainFields: ['svelte', 'browser', 'module', 'main']
 };
 
 module.exports = [
-  /** Lib - compile Typescript and Svelte files. */
+  /**
+   * Lab extension
+   *
+   * This builds the lib/ folder with the JupyterLab extension.
+   */
   {
-    mode: mode,
-    entry: {
-      plugin: './src/plugin.ts',
-    },
+    entry: './src/plugin.ts',
     output: {
-      filename: '[name].js',
+      filename: 'index.js',
       path: path.resolve(__dirname, 'lib'),
       libraryTarget: 'amd',
+      publicPath: '',
     },
     module: {
-      rules: rules,
+      rules: rules
     },
-    devtool: 'source-map',
     externals,
     resolve,
   },
-  /** Mock - server to test changes w/o building Jupyter */
-  {
-    mode: mode,
-    entry: {
-      bundle: ['./src/mock.ts'],
-    },
-    output: {
-      path: path.resolve(__dirname, 'mock'),
-      filename: 'bundle.js',
-      publicPath: path.resolve(__dirname, 'mock'),
-    },
-    module: {
-      rules: rules,
-    },
-    resolve,
-    optimization: {
-      minimize: false,
-    },
-  },
+
+
   /**
    * Notebook extension
    *
@@ -76,22 +54,16 @@ module.exports = [
    * the notebook.
    */
   {
-    mode: mode,
     entry: './src/extension.ts',
     output: {
       filename: 'index.js',
-      path: path.resolve(
-        __dirname,
-        '{{ cookiecutter.python_package_name }}',
-        'nbextension',
-        'static'
-      ),
+      path: path.resolve(__dirname, '{{ cookiecutter.python_package_name }}', 'nbextension'),
       libraryTarget: 'amd',
+      publicPath: '',
     },
     module: {
-      rules: rules,
+      rules: rules
     },
-    devtool: 'source-map',
     externals,
     resolve,
   },
@@ -107,25 +79,21 @@ module.exports = [
    * the custom widget embedder.
    */
   {
-    mode: mode,
     entry: './src/index.ts',
     output: {
-      filename: 'index.js',
-      path: path.resolve(__dirname, 'dist'),
-      libraryTarget: 'amd',
-      library: '{{ cookiecutter.npm_package_name }}',
-      publicPath:
-        'https://unpkg.com/{{ cookiecutter.npm_package_name }}@' +
-        version +
-        '/dist/',
+        filename: 'index.js',
+        path: path.resolve(__dirname, 'dist'),
+        libraryTarget: 'amd',
+        library: "{{ cookiecutter.npm_package_name }}",
+        publicPath: 'https://unpkg.com/{{ cookiecutter.npm_package_name }}@' + version + '/dist/'
     },
-    devtool: 'source-map',
     module: {
-      rules: rules,
+        rules: rules
     },
     externals,
     resolve,
   },
+
 
   /**
    * Documentation widget bundle
@@ -133,19 +101,18 @@ module.exports = [
    * This bundle is used to embed widgets in the package documentation.
    */
   {
-    mode: mode,
     entry: './src/index.ts',
     output: {
       filename: 'embed-bundle.js',
       path: path.resolve(__dirname, 'docs', 'source', '_static'),
-      library: '{{ cookiecutter.npm_package_name }}',
-      libraryTarget: 'amd',
+      library: "{{ cookiecutter.npm_package_name }}",
+      libraryTarget: 'amd'
     },
     module: {
-      rules: rules,
+      rules: rules
     },
-    devtool: 'source-map',
     externals,
     resolve,
-  },
+  }
+
 ];
