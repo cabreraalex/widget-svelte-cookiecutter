@@ -7,4 +7,4 @@
 <p>The value is {$value}</p>
 
 <input bind:value={localValue} />
-<button on:click={value.set(localValue)}>Set Value</button>
+<button on:click={() => value.set(localValue)}>Set Value</button>

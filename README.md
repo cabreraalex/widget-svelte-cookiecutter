@@ -6,6 +6,8 @@ With **widget-svelte-cookiecutter** you can create a custom Jupyter interactive
 widget project that uses Svelte for the frontend.
 This was adapted from the fantastic [widget-ts-cookiecutter](https://github.com/jupyter-widgets/widget-ts-cookiecutter).
 
+For an overview of how to use IPyWidgets + Svelte, check out this [blog post](https://cabreraalex.medium.com/creating-reactive-jupyter-widgets-with-svelte-ef2fb580c05).
+
 ## Usage
 
 Install [cookiecutter](https://github.com/audreyr/cookiecutter):
@@ -37,8 +39,8 @@ you should run the tests:
 
 Create a dev environment:
 ```bash
-conda create -n {{ cookiecutter.python_package_name }}-dev -c conda-forge nodejs yarn python jupyterlab
-conda activate {{ cookiecutter.python_package_name }}-dev
+conda create -n widget-dev -c conda-forge nodejs yarn python jupyterlab
+conda activate widget-dev
 ```
 
 Install the python. This will also build the TS package.
