@@ -39,21 +39,14 @@ you should run the tests:
 
 Create a dev environment:
 ```bash
-conda create -n widget-dev -c conda-forge nodejs yarn python jupyterlab
+conda create -n widget-dev -c conda-forge nodejs yarn python jupyterlab jupyter-packaging
 conda activate widget-dev
 ```
 
 Install the python. This will also build the TS package.
 
 ```bash
-# First install the python package. This will also build the JS packages.
-pip install -e ".[test, examples]"
-
-# Run the python tests. This should not give you a few sucessful example tests
-py.test
-
-# Run the JS tests. This should again, only give TODO errors (Expected 'Value' to equal 'Expected value'):
-yarn test
+pip install -e .
 ```
 
 When developing your extensions, you need to manually enable your extensions with the
@@ -78,13 +71,22 @@ of those flags here.
 
 
 ### How to see your changes
-#### Typescript:
+### Jupyter Notebook:
+For Jupyter Notebook you can just watch for JS changes:
+
+```bash
+yarn watch
+```
+
+#### Jupyter Lab:
 If you use JupyterLab to develop then you can watch the source directory and run JupyterLab at the same time in different
 terminals to watch for changes in the extension's source and automatically rebuild the widget.
 
 ```bash
 # Watch the source directory in one terminal, automatically rebuilding when needed
-yarn run watch
+yarn watch
+# Watch to rebuild JupyterLab
+jupyter labextension watch
 # Run JupyterLab in another terminal
 jupyter lab
 ```
