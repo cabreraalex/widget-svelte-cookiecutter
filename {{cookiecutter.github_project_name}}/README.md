@@ -56,17 +56,27 @@ you might also need another flag instead of `--sys-prefix`, but we won't cover t
 of those flags here.
 
 ### How to see your changes
-
-#### Jupyter Notebook:
-
-You can run yarn watch and a jupyter notebook to see your changes
+### Jupyter Notebook:
+For Jupyter Notebook you can just watch for JS changes:
 
 ```bash
-yarn run watch
+yarn watch
+```
+
+#### Jupyter Lab:
+If you use JupyterLab to develop then you can watch the source directory and run JupyterLab at the same time in different
+terminals to watch for changes in the extension's source and automatically rebuild the widget.
+
+```bash
+# Watch the source directory in one terminal, automatically rebuilding when needed
+yarn watch
+# Watch to rebuild JupyterLab
+jupyter labextension watch
+# Run JupyterLab in another terminal
+jupyter lab
 ```
 
 After a change wait for the build to finish and then refresh your browser and the changes should take effect.
 
 #### Python:
-
 If you make a change to the python code then you will need to restart the notebook kernel to have it take effect.
